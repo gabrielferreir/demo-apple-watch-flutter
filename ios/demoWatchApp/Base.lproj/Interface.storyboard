@@ -12,10 +12,20 @@
             <objects>
                 <controller id="AgC-eL-Hgc" customClass="InterfaceController" customModule="demoWatchApp" customModuleProvider="target">
                     <items>
+                        <button width="1" alignment="left" title="+" id="ZuH-Tw-MBu">
+                            <connections>
+                                <action selector="increaseBt" destination="AgC-eL-Hgc" id="Uvi-M1-uXR"/>
+                            </connections>
+                        </button>
                         <label alignment="center" verticalAlignment="center" text="Label" textAlignment="center" id="CjV-lq-IDn">
                             <color key="textColor" name="AccentColor"/>
                             <fontDescription key="font" style="UICTFontTextStyleTitle1"/>
                         </label>
+                        <button width="1" alignment="left" verticalAlignment="bottom" title="-" id="b6Q-ot-lwn">
+                            <connections>
+                                <action selector="decreaseBt" destination="AgC-eL-Hgc" id="Asr-na-0wc"/>
+                            </connections>
+                        </button>
                     </items>
                     <connections>
                         <outlet property="label" destination="CjV-lq-IDn" id="wfN-GA-pTz"/>

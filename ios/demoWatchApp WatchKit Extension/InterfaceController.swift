@@ -10,11 +10,25 @@ import Foundation
 import WatchConnectivity
 
 
+
 class InterfaceController: WKInterfaceController, WCSessionDelegate {
+
+    
     func session(_ session: WCSession, activationDidCompleteWith activationState: WCSessionActivationState, error: Error?) {
     }
     
+    @IBAction func increaseBt() {
+        self.labelValue += 1
+        self.label.setText(String(self.labelValue))
+    }
+    
+    @IBAction func decreaseBt() {
+        self.labelValue -= 1
+        self.label.setText(String(self.labelValue))
+    }
+    
     @IBOutlet var label: WKInterfaceLabel!
+    var labelValue: Int = 0;
     
     override func awake(withContext context: Any?) {
         super.awake(withContext: context)
@@ -25,7 +39,7 @@ class InterfaceController: WKInterfaceController, WCSessionDelegate {
          session.activate();
         }
         
-        label.setText("")
+        label.setText("0")
     }
     
     override func willActivate() {
@@ -39,7 +53,9 @@ class InterfaceController: WKInterfaceController, WCSessionDelegate {
     }
     
     func session(_ session: WCSession, didReceiveMessage message: [String : Any]) {
-        self.label.setText(message["counter"] as! String)
+        var counter = message["counter"] as! String
+        self.label.setText(counter)
+        self.labelValue = Int(counter) ?? 0;
     }
 
 }
