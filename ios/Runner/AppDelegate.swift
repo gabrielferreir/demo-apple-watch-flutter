@@ -1,51 +1,35 @@
 import UIKit
 import Flutter
-import WatchConnectivity
 
-@available(iOS 9.3, *)
+@available(iOS 13, *)
 @UIApplicationMain
-@objc class AppDelegate: FlutterAppDelegate, WCSessionDelegate {
+@objc class AppDelegate: FlutterAppDelegate{
     
-  func session(_ session: WCSession, activationDidCompleteWith activationState: WCSessionActivationState, error: Error?) {
-  }
-  func sessionDidBecomeInactive(_ session: WCSession) {
-  }
-  
-  func sessionDidDeactivate(_ session: WCSession) {
-  }
-  
-  func sendString(text: String){
-     print(text)
-     let session = WCSession.default;
-     if(session.isPaired && session.isReachable){
-       DispatchQueue.main.async { // Send the message asynchronously
-         print("Sending counter…")
-         session.sendMessage(["counter": text], replyHandler: nil)
-       }
-     } else {
-      print("Watch not reachable…")
-     }
-  }
+  var channel: FlutterMethodChannel?;
     
+    @objc func sendMessageToFlutter(_ notification: Notification) {
+        channel?.invokeMethod("new_string", arguments: notification.object)
+    }
+
   override func application(
     _ application: UIApplication,
     didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?
   ) -> Bool {
-    
-    if(WCSession.isSupported()){
-       let session = WCSession.default;
-       session.delegate = self;
-       session.activate();
-    }
-      
     let controller : FlutterViewController = window?.rootViewController as! FlutterViewController
       
-    let channel = FlutterMethodChannel(name: "myWatchChannel", binaryMessenger: controller.binaryMessenger)
+      channel = FlutterMethodChannel(name: "myWatchChannel", binaryMessenger: controller.binaryMessenger)
       
-    channel.setMethodCallHandler({
+      WatchConnectivityManager.shared.center.addObserver(self,
+                                                          selector: #selector(sendMessageToFlutter),
+                                                          name: .message,
+                                                          object: nil
+                                                      )
+   
+      
+    channel!.setMethodCallHandler({
         (call: FlutterMethodCall, result: @escaping FlutterResult) -> Void in
       if(call.method == "sendStringToNative"){
-          self.sendString(text: call.arguments as! String)
+          WatchConnectivityManager.shared.send(call.arguments as! String)
       }
     })
       

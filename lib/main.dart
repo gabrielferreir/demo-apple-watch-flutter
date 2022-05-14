@@ -1,9 +1,31 @@
+import 'dart:async';
+
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
-
 void main() {
   runApp(const MyApp());
+}
+
+class StringService {
+  final methodChannel =
+  const MethodChannel("myWatchChannel");
+
+  final StreamController<String> _stringStreamController =
+  StreamController<String>();
+
+  Stream<String> get stringStream => _stringStreamController.stream;
+
+  StringService() {
+    methodChannel.setMethodCallHandler((call) async {
+      if (call.method == "new_string") {
+        _stringStreamController.add(call.arguments as String);
+      } else {
+        print("Method not implemented: ${call.method}");
+      }
+    });
+    methodChannel.invokeMethod("isReady");
+  }
 }
 
 class MyApp extends StatelessWidget {
@@ -16,15 +38,17 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         primarySwatch: Colors.blue,
       ),
-      home: const MyHomePage(title: 'Flutter Demo Home Page'),
+      home: MyHomePage(title: 'Flutter Demo Home Page', stringService: StringService()),
     );
   }
 }
 
 class MyHomePage extends StatefulWidget {
-  const MyHomePage({Key? key, required this.title}) : super(key: key);
+  const MyHomePage({Key? key, required this.title, required this.stringService}) : super(key: key);
 
   final String title;
+  final StringService stringService;
+
 
   @override
   State<MyHomePage> createState() => _MyHomePageState();
@@ -33,6 +57,16 @@ class MyHomePage extends StatefulWidget {
 class _MyHomePageState extends State<MyHomePage> {
   static const channel = MethodChannel('myWatchChannel');
   int _counter = 0;
+
+  @override
+  void initState() {
+    super.initState();
+    widget.stringService.stringStream.listen((newString) {
+      setState(() {
+        _counter = int.parse(newString);
+      });
+    });
+  }
 
   void _incrementCounter() {
     setState(() {

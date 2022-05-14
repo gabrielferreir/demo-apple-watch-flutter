@@ -25,6 +25,8 @@
 		C04FFE36282C080600A9030B /* demoWatchAppUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = C04FFE35282C080600A9030B /* demoWatchAppUITests.swift */; };
 		C04FFE38282C080600A9030B /* demoWatchAppUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = C04FFE37282C080600A9030B /* demoWatchAppUITestsLaunchTests.swift */; };
 		C04FFE3B282C080600A9030B /* demoWatchApp.app in Embed Watch Content */ = {isa = PBXBuildFile; fileRef = C04FFE07282C080400A9030B /* demoWatchApp.app */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
+		C059BE22282EB8F600DC6A57 /* WatchConnectivityManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = C059BE21282EB8F600DC6A57 /* WatchConnectivityManager.swift */; };
+		C059BE23282EB8F600DC6A57 /* WatchConnectivityManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = C059BE21282EB8F600DC6A57 /* WatchConnectivityManager.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -123,6 +125,7 @@
 		C04FFE31282C080600A9030B /* demoWatchAppUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = demoWatchAppUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		C04FFE35282C080600A9030B /* demoWatchAppUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = demoWatchAppUITests.swift; sourceTree = "<group>"; };
 		C04FFE37282C080600A9030B /* demoWatchAppUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = demoWatchAppUITestsLaunchTests.swift; sourceTree = "<group>"; };
+		C059BE21282EB8F600DC6A57 /* WatchConnectivityManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WatchConnectivityManager.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -171,6 +174,7 @@
 		97C146E51CF9000F007C117D = {
 			isa = PBXGroup;
 			children = (
+				C059BE20282EB8D700DC6A57 /* WatchConnectivityManager */,
 				9740EEB11CF90186004384FC /* Flutter */,
 				97C146F01CF9000F007C117D /* Runner */,
 				C04FFE08282C080400A9030B /* demoWatchApp */,
@@ -246,6 +250,14 @@
 				C04FFE37282C080600A9030B /* demoWatchAppUITestsLaunchTests.swift */,
 			);
 			path = demoWatchAppUITests;
+			sourceTree = "<group>";
+		};
+		C059BE20282EB8D700DC6A57 /* WatchConnectivityManager */ = {
+			isa = PBXGroup;
+			children = (
+				C059BE21282EB8F600DC6A57 /* WatchConnectivityManager.swift */,
+			);
+			path = WatchConnectivityManager;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -359,6 +371,7 @@
 					};
 					C04FFE06282C080400A9030B = {
 						CreatedOnToolsVersion = 13.2.1;
+						LastSwiftMigration = 1320;
 					};
 					C04FFE11282C080500A9030B = {
 						CreatedOnToolsVersion = 13.2.1;
@@ -477,6 +490,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				74858FAF1ED2DC5600515810 /* AppDelegate.swift in Sources */,
+				C059BE22282EB8F600DC6A57 /* WatchConnectivityManager.swift in Sources */,
 				1498D2341E8E89220040F4C2 /* GeneratedPluginRegistrant.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -489,6 +503,7 @@
 				C04FFE1E282C080600A9030B /* ComplicationController.swift in Sources */,
 				C04FFE1A282C080600A9030B /* ExtensionDelegate.swift in Sources */,
 				C04FFE18282C080600A9030B /* InterfaceController.swift in Sources */,
+				C059BE23282EB8F600DC6A57 /* WatchConnectivityManager.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -794,6 +809,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++17";
+				CLANG_ENABLE_MODULES = YES;
 				CLANG_ENABLE_OBJC_WEAK = YES;
 				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
 				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
@@ -807,6 +823,11 @@
 				INFOPLIST_KEY_CFBundleDisplayName = demoWatchApp;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
 				INFOPLIST_KEY_WKCompanionAppBundleIdentifier = com.example.demoWatch;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
 				MARKETING_VERSION = 1.0;
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
@@ -816,6 +837,7 @@
 				SKIP_INSTALL = YES;
 				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
 				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_OBJC_BRIDGING_HEADER = "WatchConnectivityManager/demoWatchApp-Bridging-Header.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = 4;
@@ -831,6 +853,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++17";
+				CLANG_ENABLE_MODULES = YES;
 				CLANG_ENABLE_OBJC_WEAK = YES;
 				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
 				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
@@ -844,6 +867,11 @@
 				INFOPLIST_KEY_CFBundleDisplayName = demoWatchApp;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
 				INFOPLIST_KEY_WKCompanionAppBundleIdentifier = com.example.demoWatch;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
 				MARKETING_VERSION = 1.0;
 				MTL_FAST_MATH = YES;
 				PRODUCT_BUNDLE_IDENTIFIER = com.example.demoWatch.watchkitapp;
@@ -851,6 +879,7 @@
 				SDKROOT = watchos;
 				SKIP_INSTALL = YES;
 				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_OBJC_BRIDGING_HEADER = "WatchConnectivityManager/demoWatchApp-Bridging-Header.h";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = 4;
 				WATCHOS_DEPLOYMENT_TARGET = 8.3;
@@ -865,6 +894,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++17";
+				CLANG_ENABLE_MODULES = YES;
 				CLANG_ENABLE_OBJC_WEAK = YES;
 				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
 				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
@@ -878,6 +908,11 @@
 				INFOPLIST_KEY_CFBundleDisplayName = demoWatchApp;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
 				INFOPLIST_KEY_WKCompanionAppBundleIdentifier = com.example.demoWatch;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
 				MARKETING_VERSION = 1.0;
 				MTL_FAST_MATH = YES;
 				PRODUCT_BUNDLE_IDENTIFIER = com.example.demoWatch.watchkitapp;
@@ -885,6 +920,7 @@
 				SDKROOT = watchos;
 				SKIP_INSTALL = YES;
 				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_OBJC_BRIDGING_HEADER = "WatchConnectivityManager/demoWatchApp-Bridging-Header.h";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = 4;
 				WATCHOS_DEPLOYMENT_TARGET = 8.3;

@@ -7,24 +7,24 @@
 
 import WatchKit
 import Foundation
-import WatchConnectivity
 
-
-
-class InterfaceController: WKInterfaceController, WCSessionDelegate {
-
-    
-    func session(_ session: WCSession, activationDidCompleteWith activationState: WCSessionActivationState, error: Error?) {
-    }
+class InterfaceController: WKInterfaceController {
     
     @IBAction func increaseBt() {
-        self.labelValue += 1
-        self.label.setText(String(self.labelValue))
+            self.labelValue += 1
+            self.label.setText(String(self.labelValue))
+            WatchConnectivityManager.shared.send(String(self.labelValue))
     }
     
     @IBAction func decreaseBt() {
         self.labelValue -= 1
         self.label.setText(String(self.labelValue))
+        WatchConnectivityManager.shared.send(String(self.labelValue))
+    }
+    
+    @objc func updateLabel(_ notification: Notification) {
+        self.labelValue = Int(notification.object as! String) ?? 0;
+        self.label.setText(String(labelValue))
     }
     
     @IBOutlet var label: WKInterfaceLabel!
@@ -32,14 +32,13 @@ class InterfaceController: WKInterfaceController, WCSessionDelegate {
     
     override func awake(withContext context: Any?) {
         super.awake(withContext: context)
-        
-        if(WCSession.isSupported()){
-         let session = WCSession.default;
-         session.delegate = self;
-         session.activate();
-        }
-        
-        label.setText("0")
+        WatchConnectivityManager.shared.send(String(labelValue))
+        self.label.setText(String(labelValue))
+        WatchConnectivityManager.shared.center.addObserver(self,
+                                                            selector: #selector(updateLabel),
+                                                            name: .message,
+                                                            object: nil
+                                                        )
     }
     
     override func willActivate() {
@@ -50,12 +49,6 @@ class InterfaceController: WKInterfaceController, WCSessionDelegate {
     override func didDeactivate() {
         // This method is called when watch view controller is no longer visible
         super.didDeactivate()
-    }
-    
-    func session(_ session: WCSession, didReceiveMessage message: [String : Any]) {
-        var counter = message["counter"] as! String
-        self.label.setText(counter)
-        self.labelValue = Int(counter) ?? 0;
     }
 
 }
